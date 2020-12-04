@@ -1,0 +1,175 @@
+\documentclass{article}[14pt]
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\usepackage[english,greek]{babel}
+\usepackage[iso-8859-7]{inputenc}
+\newcommand{\tl}{\textlatin}
+\selectlanguage{greek}
+
+
+\usepackage{float}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{mathrsfs}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{color, soul}
+
+\newcommand{\sca}[1]{\left\langle#1\right\rangle} %\sca{x,y}
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\apol}[1]{\left\lvert#1\right\rvert}
+
+\newtheorem{theorem}{Theorem}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{exe}{'Ασκηση}
+
+\textwidth=17cm \evensidemargin=0cm \oddsidemargin=0cm
+\textheight=22cm
+
+
+\begin{document}
+\date{}
+
+\large
+
+\begin{center}
+ΜΑΘΗΜΑΤΙΚΗ ΛΟΓΙΚΗ\\
+Πρώτο Πακέτο Ασκήσεων
+\end{center}
+
+\bigskip
+
+\normalsize
+
+\begin{exe}
+  Ένα σύνολο εκφράσεων $X\subseteq E(\Gamma_0)$ της γλώσσας $\Gamma_0$ του Προτασιακού Λογισμού λέγεται {\bf κλειστό} ως προς τους συνδέσμους αν για κάθε $\alpha, \beta \in X $ ισχύει ότι $\neg\alpha, \alpha\wedge\beta, \alpha \vee \beta, \alpha \rightarrow\beta, \alpha \leftrightarrow \beta \in X $.\\ Αποδείξτε ότι:
+  $$T(\Gamma_0) = \bigcap \Big\{ X\subseteq E(\Gamma_0) \mid M(\Gamma_0) \subseteq X \text{ και } X \text{ είναι κλειστό ως προς τους συνδέσμους} \Big\}. $$
+\end{exe}
+
+\medskip
+
+\begin{exe}
+ Για κάθε προτασιακό τύπο $\varphi$ και οποιεσδήποτε αποτιμήσεις $a_1, a_2$ αποδείξτε ότι: αν οι $a_1, a_2$ συμφωνούν στις προτασιακές μεταβλητές που εμφανίζονται στον $\varphi$, τότε $\overline{ a_1} (\varphi)=\overline{ a_2}(\varphi)$.
+\end{exe}
+
+\medskip
+
+\begin{exe}
+  Έστω $\varphi$ ένας προτασιακός τύπος. Ορίζουμε ως μήκος του $\varphi$ το πλήθος των συμβόλων που περιέχει. Αποδείξτε ότι αν ο $\varphi$ δεν περίεχει
+  τον σύνδεσμο της άρνησης, τότε το μήκος του είναι της μορφής $4k+1$, όπου $k$ φυσικός αριθμός, και ότι το πλήθος των προτασιακών μεταβλητών του $\varphi$ είναι $k+1$.\\
+  (\emph{Παρατήρηση}: Σε αυτήν την άσκηση, θεωρούμε τους προτασιακούς τύπους με όλες τους τις παρενθέσεις.)
+\end{exe}
+
+
+\medskip
+
+\begin{exe}
+ Έστω $a\colon M(\Gamma_0) \to \{A, \Psi\}$ μια αποτίμηση. Γνωρίζουμε ότι η $a$ επεκτείνεται σε μια συνάρτηση $\overline{a}\colon T(\Gamma_0) \to \{A,\Psi\}$ έτσι ώστε να ικανοποιούνται οι πίνακες αλήθειας των συνδέσμων. Αποδείξτε τη μοναδικότητα αυτής της επέκτασης.
+\end{exe}
+
+\medskip
+
+\begin{exe}
+  Εξετάστε αν τα παρακάτω σύνολα είναι ικανοποιήσιμα. Αιτιολογήστε την απάντησή σας.
+  \begin{itemize}
+    \item [(\tl{i})] $\Big \{ p\rightarrow(q \rightarrow r), r\rightarrow   \neg r, (s\rightarrow p) \wedge (t\rightarrow q), s\wedge t \Big\} $
+    \item [(\tl{ii})] $\Big \{ p\rightarrow(q \rightarrow \neg r), r\rightarrow   p\wedge q , (p\wedge r) \vee (s \wedge t), \neg s\vee \neg t \Big\} $
+  \end{itemize}
+\end{exe}
+
+
+\medskip
+
+\begin{exe}
+ Αφού απλοποιήσετε τους παρακάτω προτασιακούς τύπους, να εξετάσετε αν είναι ταυτολογικά ισοδύναμοι:
+    $$(p\rightarrow q) \vee (\neg p \wedge q), \quad (p\leftrightarrow q) \vee \neg (p\rightarrow q) .$$
+\end{exe}
+
+\medskip
+
+\begin{exe}
+   Χωρίς να κάνετε πίνακα αλήθειας, να εξετάσετε αν καθένας από τους παρακάτω τύπους είναι ταυτολογία:
+  \begin{itemize}
+    \item [(\tl{i})] $((p \rightarrow q ) \rightarrow (q \rightarrow r) ) \rightarrow (p \rightarrow r)$.
+    \item [(\tl{i})] $(p \rightarrow q ) \rightarrow ((q \rightarrow r) \rightarrow (p \rightarrow r))$.
+    \item [(\tl{iii})] $ (p \rightarrow q ) \rightarrow ((p\rightarrow \neg q) \rightarrow \neg p) $.
+
+  \end{itemize}
+\end{exe}
+
+
+
+\medskip
+
+
+
+\begin{exe}
+  Έστω $T\subseteq T(\Gamma_0)$ ένα σύνολο προτασιακών τύπων και $\varphi, \psi\in T(\Gamma_0)$ δύο προτασιακοί τύποι. Να αποδείξετε ή να καταρρίψετε καθέναν από τους ακόλουθους ισχυρισμούς:
+  \begin{itemize}
+    \item [(\tl{i})] Αν $T \models \varphi$ ή $T\models \psi$, τότε $T \models \varphi \vee \psi$.
+    \item [(\tl{ii})] Αν $T \models \varphi \vee \psi$, τότε $T \models \varphi$ ή $T\models \psi$.
+  \end{itemize}
+\end{exe}
+
+\medskip
+
+\begin{exe}
+  Έστω $T\subseteq T(\Gamma_0)$ ένα σύνολο προτασιακών τύπων και $\varphi, \psi\in T(\Gamma_0)$ δύο προτασιακοί τύποι. Αν $T\cup\{\varphi\} \models \neg \psi$, δείξτε ότι $T\cup\{\psi\}\models \neg \varphi$.
+\end{exe}
+
+\medskip
+
+\begin{exe}
+  \begin{itemize}
+    \item [(\tl{i})] Αποδείξτε ότι $\models (p\rightarrow q) \vee (q\rightarrow r)$.
+    \item [(\tl{ii})] Αποδείξτε ή καταρρίψτε τον ισχυρισμό:
+    $$ \models (p\leftrightarrow q) \leftrightarrow \left( p \leftrightarrow \left( q \leftrightarrow p \right) \right).$$
+  \end{itemize}
+\end{exe}
+
+\medskip
+
+
+
+\begin{exe}
+  Να απλοποιήσετε τους παρακάτω προτασιακούς τύπους:
+    \begin{itemize}
+    \item [(\tl{i})] $\left( p_1 \wedge p_2 \right) \vee \left( \left( p_3 \rightarrow p_4 \right) \wedge p_1 \right) \vee \neg \left(p_1 \vee \neg p_2 \right) \vee\neg\left( \left( p_3 \wedge\neg p_4 \right) \vee p_1 \right)$
+    \item [(\tl{ii})] $\neg \left[ \neg \left(\neg p_2 \wedge \neg p_4 \right) \to \neg p_1 \vee \neg p_3 \right] \vee \neg \left[ \neg p_1 \vee \neg p_3 \to \neg \left( \neg p_2 \wedge \neg p_4 \right) \right].$
+  \end{itemize}
+\end{exe}
+
+\medskip
+
+\begin{exe}
+
+    Γράψτε τους παρακάτω προτασιακούς τύπους σε Κανονική Διαζευκτική Μορφή:
+  \begin{itemize}
+    \item [(\tl{i})] $(p\vee q \rightarrow\neg r) \rightarrow (p \leftrightarrow q \wedge r)$.
+    \item [(\tl{ii})] $(p\leftrightarrow q \vee r) \leftrightarrow (p  \wedge \neg q \rightarrow r)$
+    \item [(\tl{iii})] $ p\leftrightarrow \neg\neg p$.
+  \end{itemize}
+\end{exe}
+
+
+\bigskip
+
+\begin{center}
+  {\bf Σημείωση}
+\end{center}
+
+\noindent Οι λύσεις των ασκήσεων πρέπει να παραδοθούν μέχρι τις {\bf 20-11-2020} αποκλειστικά μέσω της ηλεκτρονικής τάξης.
+
+
+
+
+
+
+
+\end{document}
