@@ -1,0 +1,712 @@
+\documentclass[11pt]{article}
+
+\usepackage{fullpage,amsthm,amssymb,amsmath,amsfonts}
+\usepackage{graphicx,algorithmic,algorithm}
+\usepackage[]{datetime}
+\usepackage{aliascnt} % new !
+\usepackage{hyperref,todonotes}
+\usepackage{lmodern}
+\usepackage{mathtools}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+
+% for \mapsfrom
+\usepackage{stmaryrd}
+
+\usepackage{subcaption}
+\usepackage{cleveref}
+
+\usepackage[greek,english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{alphabeta}
+
+\usepackage{amsmath,ifthen,color,eurosym}
+\usepackage{wrapfig,hyperref,cite}
+%\usepackage{times}
+\usepackage{latexsym,amsthm,amsmath,amssymb,url}
+%,cite}
+
+\usepackage{float}
+
+\extrafloats{100}
+
+\usepackage{enumerate}
+\usepackage{enumitem}
+
+%\usepackage{dirtytalk}
+
+\usepackage{cite}
+\usepackage{enumitem}
+\setlist[enumerate]{resume}
+\usepackage{amsthm}
+
+
+% \newcommand{\aliv}[1]{\marginpar{\scriptsize \tt {A.Λ.}> {\sl #1}}}
+
+\usepackage{color}
+
+
+\newcommand{\yellow}[1]{{\color{Yellow}#1}}
+\newcommand{\black}[1]{{\color{Black}#1}}
+\newcommand{\other}[1]{{\color{Other}#1}}
+\newcommand{\otherother}[1]{{\color{Otherother}#1}}
+\newcommand{\blue}[1]{{\color{Blue}#1}}
+\newcommand{\red}[1]{{\color{Red}#1}}
+\newcommand{\green}[1]{{\color{mygreen}#1}}
+\newcommand{\magenta}[1]{{\color{Magenta}#1}}
+\newcommand{\brown}[1]{{\color{Brown}#1}}
+\newcommand{\white}[1]{{\color{White}#1}}
+\newcommand{\grey}[1]{{\color{Grey}#1}}
+\DeclareMathOperator{\tw}{{\bf tw}}
+
+
+% Autoref stuff
+
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = blue, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor   = red %Colour of citations
+}
+
+
+
+
+\newtheoremstyle{plain}% <name>
+{3pt} % <space above>
+{3pt} % <space below>
+{\it} % <Body font>
+{} % <Indent amount>
+{\rm\bfseries} % <Theorem head font>
+{.} % <Punctuation after theorem head>
+{.5em} % <Space after theorem head>
+{} % <Theorem head spec (can be left empty, meaning ‘normal’)>
+
+\newtheoremstyle{definition}% <name>
+{15pt} % <space above>
+{15pt} % <space below>
+{\rm} % <Body font>
+{} % <Indent amount>
+{\rm\bfseries} % <Theorem head font>
+{.} % <Punctuation after theorem head>
+{.5em} % <Space after theorem head>
+{} % <Theorem head spec (can be left empty, meaning ‘normal’)>
+
+\newtheoremstyle{remark}% <name>
+{3pt} % <space above>
+{3pt} % <space below>
+{\rm} % <Body font>
+{} % <Indent amount>
+{\it} % <Theorem head font>
+{.} % <Punctuation after theorem head>
+{.5em} % <Space after theorem head>
+{} % <Theorem head spec (can be left empty, meaning ‘normal’)>
+
+
+
+%for a good theorem numbering
+\newtheorem{dummy}{***}[section]
+\newcommand{\mynewtheorem}[2]{
+\newaliascnt{#1}{dummy}
+\newtheorem{#1}[#1]{#2}
+\aliascntresetthe{#1}
+ % maybe we will squish some autoref defaults, but who cares?
+\expandafter\def\csname #1autorefname\endcsname{#2}
+}
+
+
+\theoremstyle{plain}
+\mynewtheorem{theorem}{Theorem}
+\mynewtheorem{proposition}{Proposition}
+\mynewtheorem{corollary}{Corollary}
+\mynewtheorem{lemma}{Lemma}
+
+\theoremstyle{definition}
+\mynewtheorem{definition}{Definition}
+\mynewtheorem{example}{Example}
+\mynewtheorem{exercise}{Exercise}
+\mynewtheorem{examples}{Examples}
+\mynewtheorem{exercises}{Exercises}
+
+\theoremstyle{remark}
+\mynewtheorem{claim}{Claim}
+\mynewtheorem{remark}{Remark}
+\mynewtheorem{conjecture}{Conjecture}
+\mynewtheorem{question}{Question}       
+\mynewtheorem{observation}{Observation}
+\mynewtheorem{problem}{Problem}
+\mynewtheorem{note}{Note}
+\mynewtheorem{remarks}{Remarks}
+
+
+
+\def\problemautorefname{Problem}
+\def\chapterautorefname{Chapter}
+\def\definitionautorefname{Definition}
+\def\claimautorefname{Claim}
+\def\corollaryautorefname{Corollary}
+\def\lemmaautorefname{Lemma}
+\def\sublemmaautorefname{Sublemma}
+\def\propositionautorefname{Proposition}
+\def\observationautorefname{Observation}
+\def\corollaryautorefname{Corollary}
+\def\sectionautorefname{Section}
+\def\subsectionautorefname{Subsection}
+\def\figureautorefname{Figure}
+\def\tableautorefname{Table}
+\def\remarkautorefname{Remark}
+\def\rmkautorefname{Remark}
+\def\observationautorefname{Observation}
+\def\conjectureautorefname{Conjecture}
+\def\questionautorefname{Question}
+\def\exampleautorefname{Example}
+
+
+
+
+%1-1 correspondence
+\makeatletter
+\def\DoubleFill@{\arrowfill@=\Relbar=}
+\providecommand*\xDouble[2][]{%
+  \ext@arrow 0055{\DoubleFill@}{#1}{#2}}
+\makeatother
+
+%Subobject classifier
+\newcommand{\ceil}[1]{\lceil #1 \rceil }
+
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cF}{\mathcal{F}}
+
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Ob}{\mathrm{Ob}}
+\newcommand{\Ar}{\mathrm{Ar}}
+\newcommand{\dom}{\mathrm{dom}}
+\newcommand{\cod}{\mathrm{cod}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\Cone}{\mathrm{Cone}}
+\newcommand{\Cocone}{\mathrm{Cocone}}
+\newcommand{\colim}{\mathrm{colim}}
+\newcommand{\Sub}{\mathrm{Sub}}
+\newcommand{\PSh}{\mathrm{PSh}}
+\newcommand{\im}{\mathrm{im}}
+\newcommand{\Cat}{\mathrm{Cat}}
+\newcommand{\Alg}{\mathrm{Alg}}
+\newcommand{\Adj}{\mathrm{Adj}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Sh}{\mathrm{Sh}}
+\newcommand{\Sep}{\mathrm{Sep}}
+\newcommand{\ClSub}{\mathrm{ClSub}}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+
+\title{Category Theory: Lecture 1}
+\author{$\mathrm{CT_{\Epsilon\Kappa\Pi\Alpha}}$\MakeLowercase{WS}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzcd}
+  \arrow[rr, bend right=60] \arrow[rr, bend right=49] \arrow[rr, bend right] \arrow[rr, bend left=60] \arrow[rr, bend left=49] \arrow[rr, bend left] \arrow[rr] \arrow[rr, bend right=67] \arrow[rr, bend left=67] \arrow[rr, bend right=71] \arrow[rr, bend left=71] \arrow[rr, bend left=74] \arrow[rr, bend right=74] \arrow[rr, bend left=76] \arrow[rr, bend right=76] \arrow[rr, bend right=78] \arrow[rr, bend left=78] \arrow[rr, bend right=79] \arrow[rr, bend left=79]                                                                                                           &  &  \arrow[dd, bend right=76] \arrow[dd, bend right=74] \arrow[dd, bend right=71] \arrow[dd, bend right=67] \arrow[dd, bend right=60] \arrow[dd, bend right=49] \arrow[dd, bend right] \arrow[dd, bend left=71] \arrow[dd, bend left=74] \arrow[dd, bend left=76] \arrow[dd, bend left=67] \arrow[dd, bend left=60] \arrow[dd, bend left=49] \arrow[dd, bend left] \arrow[dd] \arrow[dd, bend left=78] \arrow[dd, bend right=78] \arrow[dd, bend right=79] \arrow[dd, bend right=80] \\                        &  &                            \\
+ \arrow[rruu, bend right=60] \arrow[rruu, bend right=49] \arrow[rruu, bend right] \arrow[rruu, bend left=60] \arrow[rruu, bend left=49] \arrow[rruu, bend left] \arrow[uu, bend left=60] \arrow[uu, bend left=49] \arrow[uu, bend left] \arrow[uu, bend right=60] \arrow[uu, bend right=49] \arrow[uu, bend right] \arrow[uu, bend right=67] \arrow[uu, bend left=67] \arrow[uu, bend left=71] \arrow[uu, bend right=71] \arrow[uu, bend right=74] \arrow[uu, bend left=74] \arrow[uu, bend right=76] \arrow[uu, bend left=76] \arrow[uu, bend right=78] \arrow[uu, bend left=78] \arrow[uu, bend left=79] \arrow[uu, bend right=79] \arrow[uu] \arrow[rruu] \arrow[rr, bend left=79] \arrow[rr, bend left=78] \arrow[rr, bend left=76] \arrow[rr, bend left=74] \arrow[rr, bend left=71] \arrow[rr, bend left=67] \arrow[rr, bend left=60] \arrow[rr, bend left=49] \arrow[rr, bend left] \arrow[rr, bend right=78] \arrow[rr, bend right=76] \arrow[rr, bend right=74] \arrow[rr, bend right=71] \arrow[rr, bend right=67] \arrow[rr, bend right=60] \arrow[rr, bend right=49] \arrow[rr, bend right] \arrow[rr] &  &  \arrow[lluu, bend left=67] \arrow[lluu, bend left=71] \arrow[lluu, bend left=60] \arrow[lluu, bend left=49] \arrow[lluu, bend left] \arrow[lluu, bend left] \arrow[lluu, bend right=71] \arrow[lluu, bend right=67] \arrow[lluu, bend right=49] \arrow[lluu, bend right] \arrow[lluu] \arrow[lluu, bend right=60]      
+\end{tikzcd} 
+\end{figure}
+
+
+\section{Definition of a Category and Examples.}
+
+\begin{definition}[Category]
+A {\em category} $\cC$ is given by a collection $\cC_{0}$ of 
+{\em objects} and a collection $\cC_{1}$ of {\em arrows} or
+{\em morphisms} which have the following structure:
+\begin{itemize}
+    \item Each arrow has a {\em domain} and a {\em codomain}
+    which are objects. We write $f:X\to Y$ or $X\xrightarrow{f}Y$
+    if $X$ is the domain of $f$ and $Y$ its codomain.
+    We also write $X=\dom(f)$ and $Y=\cod(f)$.
+    
+    \item Given two arrows $f$ and $g$ such that
+    $\cod(f)=\dom(g)$, the {\em composition} of $f$ and $g$ is
+    defined and has domain $\dom(f)$ and codomain $\cod(g)$. We
+    write $g\circ f$ or $gf$:
+    \begin{equation*}
+        (X\xrightarrow{f}Y\xrightarrow{g}Z)\mapsto
+        (X\xrightarrow{g\circ f}Z).
+    \end{equation*}
+    
+    \item Composition is {\em associative}, that is: given morphisms
+    \begin{equation*}
+        X\xrightarrow{f}Y\xrightarrow{g}Z\xrightarrow{h}W
+    \end{equation*}
+    we get $h\circ(g\circ f)=(h\circ g)\circ f$.
+    
+    \item For every object $X$ there is an {\em identity} arrow
+    $\id_{X}:X\to X$, such that for every $g:Y\to X$ and
+    $f:X\to Y$ we get $\id_{X}\circ g=g$ and $f\circ\id_{X}=f$.
+\end{itemize}
+\end{definition}
+
+\begin{remark}
+For every object $X\in\cC_{0}$ the identity arrow $\id_{X}$ is unique
+(see \autoref{exc:identity}).
+\end{remark}
+
+\begin{definition}[$\Hom$]
+Given two objects $X$ and $Y$, the collection of all arrows $f$ in 
+$\cC$ with $\dom(f)=X$ and $\cod(f)=Y$ is denoted by $\Hom(X,Y)$.
+\end{definition}
+
+\begin{examples}
+\begin{enumerate}
+    \item $\mathbf{1}$ is the category with one object,
+    $*$, and one arrow, $id_{*}$.
+    \item $\mathbf{0}$ is the empty category. It has no objects
+    and no arrows.
+    \item Most basic categories have as objects certain mathematical
+    structures, and the structure-preserving functions as morphisms. Examples:
+    \begin{enumerate}
+        \item \textbf{Grp} is the category of groups and group homomorphisms.
+        \item \textbf{Rng} is the category of rings and ring homomorphisms.
+        \item \textbf{Top} is the category of topological spaces and continuous
+        functions.
+        \item \textbf{Grph} is the category of graphs and graphs homomorphisms.
+        \item \textbf{Pos} is the category of partially ordered sets and monotone
+        functions.
+         \item \textbf{Set} is the category which has the class of all sets as
+         objects,and functions between sets as arrows.
+    \end{enumerate}
+    
+    \item Given a set $A$ we can define the category $\cC$ with objects
+    the elements of the set $A$ and arrows the identity arrows.
+    We call this category the {\em discrete category} on $A$.
+    
+    \item \label{example:preorder}
+    A {\em preorder} is a set $X$ together with a binary
+    relation $\leq$ which is reflexive (i.e. $x\leq x,$ for all $x\in
+    X$)
+    and transitive (i.e. $x\leq y$ and $y \leq z$ imply that $x\leq z$
+    for every $x,y,z \in X).$ This can be viewed as a category with
+    objects the elements of $X$ and for every two elements (objects)
+    $x,y\in A$ exactly one arrow $x\to y$.
+    The "converse" is also true (See \autoref{exc:preorder}).
+   
+    \item Let ($G$, $\cdot$) be a group. This can be considered as
+    a category with one object, denoted by $G$, and with arrows the
+    elements of $G$ considered as arrows $G\to G$.
+   
+\end{enumerate}
+\end{examples}
+
+\begin{definition}[Isomorphism]
+A morphism $f:X\rightarrow Y$ is an isomorphism if there is $g:Y \rightarrow X$
+such that $f\circ g= id_{Y}$ and $g \circ f= id_{X}$. We call $g$ the inverse of
+$f$ (and vice versa, of course); it is unique if it exists. We also write
+$g=f^{-1}$.
+\end{definition}
+
+\begin{definition}[Small - Locally Small Category]
+A category $\cC$ is called {\em small} if the collection of arrows of $\cC$ is
+a set. A category $\cC$ is called {\em locally small} if for every two objects
+$X,Y$ it holds that $\Hom(X,Y)$ is a set.
+\end{definition}
+
+\begin{remarks}
+\begin{enumerate}
+    \item Obviously a small category is also locally small, although the 
+    converse does not hold necessarily
+    (see \autoref{example:setsmallbutnotlocally} below).
+    
+    \item Observe that if we have a small category then the collection of its
+    objects is also a set. This follows from the fact that there is an
+    one-to-one correspondence between the objects and the collection of identity
+    arrows, which is a subset of $\cC_{1}$.\footnote{More accurately, this
+    follows from the Axiom of Replacement.}
+\end{enumerate}
+\end{remarks}
+
+\begin{example}\label{example:setsmallbutnotlocally}
+Consider the category $\textbf{Set}$. This is a locally small category as
+for every pair of sets $X,Y$, $\Hom(X,Y)$ is a set.
+However, it is not a small category as the collection of all sets
+is not a set.
+\end{example}
+\begin{examples}
+\begin{enumerate}
+    \item A {\em groupoid} is a small category in which all the arrows
+    are isomorphisms. Observe that a groupoid with one object defines a
+    group.
+    
+    \item Α {\em monoid} is a set $X$ together with a binary operation,
+    written like multiplication: $xy$ for $x,y \in X$, which is associative
+    and has
+    a unit element $e \in X$, satisfying $ex=xe=x$ for all $x \in X$. 
+    A monoid can be viewed as a category with one object $*$ and an arrow
+    $x:*\to *$ for every $x \in X$.
+\end{enumerate}
+\end{examples}
+
+
+
+
+
+\section{Definition of a Functor and Examples.}
+
+\begin{definition}[Functor]
+Let $\cC$ and $\cD$ be two categories. A {\em functor} 
+$F:\cC\to\cD$ consists of operations $F_{0}:\cC_{0}\to\cD_{0}$
+and $F_{1}:\cC_{1}\to\cD_{1}$, such that for each morphism
+$f:X\to Y$,
+\begin{equation*}
+    F_{1}(f):F_{0}(X)\to F_{0}(Y)
+\end{equation*}
+and:
+\begin{itemize}
+    \item for two morphisms
+    \begin{equation*}
+        X\xrightarrow{f}Y\xrightarrow{g}Z
+    \end{equation*}
+    we have $F_{1}(gf)=F_{1}(g)F_{1}(f)$.
+    \item for each $X\in\cC_{0}$,
+    $F_{1}(\id_{X})=\id_{F_{0}(X)}$.
+\end{itemize}
+\end{definition}
+
+
+\begin{note}\label{note:associativityfunc}
+The associativity for functors holds as well (see \autoref{exc:assoc.func}).
+\end{note}
+
+
+
+\begin{examples}\label{examples:functors}
+\begin{enumerate}
+   \item For every category $\cC$ there is the {\em identity functor} which
+   corresponds every object $X$ to $X$ and every arrow $f$ to $f$.
+   
+   \item We can now define the category of all categories, denoted as
+   $\textbf{Cat}$. This has as objects the categories and as
+   arrows the functors between categories.
+   The fact that this is a category follows immediately 
+   from the associativity of functors.
+   
+   \item For every category $\cC$ there is the unique functor $\cC
+   \rightarrow \mathbf{1}$ and a unique one $\textbf{0} \rightarrow \cC$.
+   
+   \item There is a functor $U: \textbf{Grp} \rightarrow \textbf{Set}$ which
+   assigns to any group $G$ its underlying set. We call this functor
+   "forgetful": it "forgets" the mathematical structure. Similarly, there
+   are
+   forgetful functors $\textbf{Top} \rightarrow \textbf{Set}$,
+   $\textbf{Grph}
+   \rightarrow \textbf{Set} , \textbf{Rng} \rightarrow \textbf{Set},
+    \textbf{Pos} \rightarrow \textbf{Set}$ etcetera.
+    Note that we can define forgetful functors that their codomain is not 
+    $\textbf{Set.}$
+    For example, there is a forgetful functor
+    $\textbf{Rng}\rightarrow
+    \textbf{AbGrp}$, where $\textbf{AbGrp}$ is the category of Abelian
+    Groups. In this case the functor forgets the multiplicative operations
+    of
+    the ring and therefore an abelian group is defined. Observe that the
+    diagram in \autoref{fig:forget} is commutative.
+    \begin{figure}[h]
+    \centering
+    \begin{tikzcd}[column sep=tiny, row sep=scriptsize]
+	{} & {} & {} &&&& {} \\
+	{} & {} & {(R,+,\cdot)} & { \textbf{Rng}} & {} & { \textbf{Set}} & {R }
+	\\
+	&&& {} & {\textbf{AbGrp} } \\
+	&&& {} & {(R,+)} &&&& {} \\
+	&&& {} \\
+	&&& {}
+	\arrow[from=2-4, to=2-6]
+	\arrow[from=2-4, to=3-5]
+	\arrow[from=3-5, to=2-6]
+	\arrow[from=2-3, to=4-5, maps to]
+	\arrow[from=2-3, to=2-7, maps to, bend left]
+	\arrow[from=4-5, to=2-7, maps to]
+    \end{tikzcd}
+    \caption{Composition of forgetful functors.}
+    \label{fig:forget}
+    \end{figure}
+
+    \item Given two categories $\cC$ and $\cD$ we can define the {\em
+    product
+    category} $\cC \times \cD$ which has as objects pairs $(C,D) \in
+    \cC_{0}
+    \times \cD_{0}$, and as arrows: $(C,D) \rightarrow (C',D')$ pairs
+    $(f,g)$
+    with $f:C \rightarrow C'$ in $\cC$ and $g:D \rightarrow D'$ in $\cD$.
+    There are {\em projection functors} 
+    $\pi_{0}:\cC \times \cD \rightarrow \cC$ and 
+    $\pi_{1}:\cC \times \cD \rightarrow \cD$. (See \autoref{exc:prodcat})
+   \end{enumerate}
+   
+\end{examples}
+
+\begin{definition}[Slice category] \label{def:slicecat}
+    Let $\cC$ be a category and $X$ an object of $\cC$. The {\em slice
+    category} $\cC/X$ has as objects all arrows $g$ which have codomain
+    $X$. An arrow from $g:Y \rightarrow X$ to $h:Z \rightarrow X$ in
+    $\cC/X$ 
+    is an arrow $k:Y \rightarrow Z$ in $\cC$ which makes the diagram: 
+    \begin{figure}[H]
+       \centering
+       \begin{tikzcd}[column sep=small]
+          Y \arrow[rr, "k"] \arrow[rd, "g"'] &   & Z \arrow[ld, "h"] \\
+                                   & X &                  
+       \end{tikzcd}
+         \label{fig:my_label}
+    \end{figure}
+    commute\footnote{ We say that this diagram {\em commutes} if we mean that
+    $hk=g$.}.
+\end{definition}
+
+\begin{note}\label{slice:func}
+Let $\cC$ be a category. Any morphism $f:A \rightarrow B$ in $\cC$ induces a
+functor with domain the $\cC/A$ and codomain $\cC/B$ as follows:
+\begin{figure}[h]
+    \centering
+\begin{tikzcd}[row sep=small,column sep=tiny]
+F:                                  & \mathcal{C}/A     &                    & {} \arrow[rrrr]                  &  &  &    & {}                                          & \mathcal{C}/B    &                            \\
+                                    & (X \arrow[r, "g"] & A)                 & {} \arrow[rrr, "F_{0}", maps to] &  &  & {} & (X \arrow[r, "g"]                           & A \arrow[r, "f"] & B)                         \\
+X \arrow[rr, "k"] \arrow[rdd, "g"'] &                   & Y \arrow[ldd, "h"] & {} \arrow[rrr, "F_1", maps to]   &  &  & {} & X \arrow[rr, "k"] \arrow[rdd, "f \circ g"'] &                  & Y \arrow[ldd, "f \circ h"] \\
+                                    &                   &                    &                                  &  &  &    &                                             &                  &                            \\
+                                    & A                 &                    &                                  &  &  &    &                                             & B                &                           
+\end{tikzcd}
+\end{figure}
+See \autoref{exc:slicecat} for verification and the fact that this operation
+is {\em functorial}, i.e. defines a functor.
+\end{note}
+
+\begin{example}
+Take the category $\textbf{Set}$ and a singleton $\{*\}$. Then, the category
+$\textbf{Set}/\{*\}$ has as objects all the arrows $A \rightarrow \{*\}$.
+As far as for the morphisms of $\textbf{Set}/\{*\}$ we have: for every pair
+of arrows $f:A\rightarrow \{*\},g:B \rightarrow \{*\}$ we take all the
+arrows $k:A \rightarrow B$ that make the diagram below commutative:
+\begin{figure}[H]
+\centering
+\begin{tikzcd}[column sep=small]
+    A \arrow[rr, "k"] \arrow[rd, "g"'] &   & B \arrow[ld, "h"] \\
+    & \{*\} &                  
+\end{tikzcd}
+\end{figure}
+
+Note that for each set $A$ there is a unique map $A\to \{*\}$, the one that
+sends every element of the set $A$ to $*$. Hence, the above diagram always 
+commutes. Therefore, when we speak of the category $\textbf{Set}/\{*\}$,
+we practically speak of the category $\textbf{Set}$.
+\end{example}
+
+\begin{definition}[Opposite category]
+    Given a category $\cC$ we can form a category $\cC^{\op}$ which has the
+    same objects and arrows as $\cC$, but with reversed direction; so if
+    $f:X\rightarrow Y$ in $\cC$ then $f:Y \rightarrow X$ in $\cC^{\op}$. To
+    make it notationally clear, write $\bar{f}$ for the arrow $Y \rightarrow
+    X$ corresponding to $f: X \rightarrow Y$ in $\cC$. Composition in
+    $\cC^{\op}$ is defined by: if $X\xrightarrow{f} Y\xrightarrow{g} Z$ are
+    arrows in $\cC$ then
+    \begin{equation*}
+        \overline{f}\overline{g}:=\overline{gf}
+    \end{equation*}
+\end{definition}
+
+\begin{note}\label{note:opposite}
+\begin{enumerate}
+
+\item[(a)] In our terminology, a {\em contravariant functor} $F$ from a category
+$\cC$ to a category $\cD$ is just a functor from $\cC^{\op}$ to $\cD$, so
+it basically inverts the direction of the arrows. A {\em covariant 
+functor} is just a functor.
+    
+\item [(b)] Any functor $F: \cC \rightarrow \cD$ gives rise to a functor
+$F^{\op}: \cC^{\op} \rightarrow \cD^{\op}.$
+In fact, we have a functor $(-)^{\op}: \Cat \rightarrow \Cat$
+(See \autoref{exc:oppcat}).
+\end{enumerate}
+\end{note}
+
+
+\begin{examples}\label{example:yoneda}
+\begin{enumerate}
+Let $\cC$ be a locally small category, $A$ an object in
+$\cC$ and $f:X \rightarrow Y$ an arrow in $\cC$.
+
+\item We can define the functor $y_{A}=\Hom(-,A)$ as follows:
+\begin{figure}[H]
+\centering
+\begin{tikzcd}[column sep=tiny,row sep=tiny]
+	&&& {} \\
+	& {y_A:} & {\mathcal{C}^{\op}} & {} & {\mathbf{Set}} & {} & {} \\
+	& {} & {X} && {\text{Hom}(X,A)} & {} \\
+	{} & {(Y} & {X)} & {} & {\text{Hom}(Y,A)} & {\text{Hom}(X,A)} & {} \\
+	&&&& {(Y \overset{g}\longrightarrow A)} &
+	{(X\overset{f}\longrightarrow Y \overset{g}\longrightarrow A)} & {}
+	\arrow[from=2-3, to=2-5]
+	\arrow[from=3-3, to=3-5, maps to]
+	\arrow[from=5-5, to=5-6, maps to]
+	\arrow["{\overline{f}}", from=4-2, to=4-3]
+	\arrow[from=4-3, to=4-5, maps to]
+	\arrow[from=4-5, to=4-6]
+\end{tikzcd}
+\end{figure} 
+  
+The functor $y_{A}$ is often referred as {\em Yoneda functor} or
+{\em Hom functor}.
+
+\item We also define the $\Hom(A,-)$ functor:
+\begin{figure}[H]
+  \centering
+  \begin{tikzcd}[column sep=tiny,row sep=tiny]
+	&&& {} \\
+	& {h_A:} & {\mathcal{C}} & {} & {\mathbf{Set}} & {} & {} \\
+	& {} & {X} && {\text{Hom}(A,X)} & {} \\
+	{} & {(X} & {Y)} & {} & {\text{Hom}(A,X)} & {\text{Hom}(A,Y)} & {} \\
+	&&&& {(A \overset{g}\longrightarrow X)} & {(A\overset{g}\longrightarrow
+	X\overset{f}\longrightarrow Y)} & {}
+	\arrow[from=2-3, to=2-5]
+	\arrow[from=3-3, to=3-5, maps to]
+	\arrow[from=5-5, to=5-6, maps to]
+	\arrow["{f}", from=4-2, to=4-3]
+	\arrow[from=4-3, to=4-5, maps to]
+	\arrow[from=4-5, to=4-6]
+\end{tikzcd}
+      \end{figure}
+\end{enumerate}
+
+See \autoref{exc:yonedafunc} for verification.
+\end{examples}
+
+
+\section{Exercises}
+
+
+\begin{exercise}\label{exc:identity}
+ For every object $C$ in a category $\cC$ the identity arrow $\id_{C}:C\to C$
+is unique, in the sense that there is a unique arrow $C\to C$ with the 
+property of the identity.
+\end{exercise}
+
+\begin{exercise}\label{exc:preorder}
+Prove that the category defined in Example~1.4(\ref{example:preorder}) from a preorder
+is indeed a
+category. Conversely, if $\cC$ is a small category in which for every two objects
+$X,Y$ there is at most one arrow $X\to Y$, defines a preorder, in the sense that $\cC_{0}$
+can be turned into a preordered set.
+\end{exercise}
+
+\begin{exercise}\label{exc:assoc.func}
+Prove that if $F:\cC\to\cD, G:\cD\to\cE, H:\cE\to\cF$ are functors then it holds that
+$H\circ(G\circ F)=(H\circ G)\circ F$.
+\end{exercise}
+
+\begin{exercise}[Free functor]\label{exc:freefunctor}
+Let $A$ be a set and define a set $A^{-1}$ to be an arbitrary set 
+disjoint to $A$ and in 1-1 correspondence with $A$, where for each element
+$a\in A$ we denote by $a^{-1}$ its corresponding element. Consider now the set
+$\Tilde{A}$ of strings on the alphabet $A\cup A^{-1}$, i.e. finite sequences of
+elements of $A\cup A^{-1}$.
+
+We define a relation $\sim$ on $\Tilde{A}$ as follows: if $\vec{a}=a_{1}\cdots a_{n},
+\vec{b}=b_{1}\cdots b_{m}\in\Tilde{A}$ then $\vec{a}\sim\vec{b}$ iff
+we end up with the same string after deleting every substring of the
+for $xx^{-1}, x\in A,$ from each $\vec{a},\vec{b}$.
+Prove that $\sim$ defines an equivalence relation on $\Tilde{A}$.
+
+Consider the quotient $A/\sim$ of the set $A$ via the relation $\sim$ and
+define an operation on $\Tilde{A}/\sim$: let
+$[\vec{a}],[\vec{b}]\in\Tilde{A}/\sim$
+with representatives in $\Tilde{A}$ the strings $\vec{a}=a_{1}\cdots a_{n},
+\vec{b}=b_{1}\cdots b_{m}$.
+We define $[\vec{a}]^{\frown}[\vec{b}]:=[a_{1}\cdots a_{n}b_{1}\cdots b_{m}]$.
+Prove that this is a well-defined operation and that $\Tilde{A}/\sim$ together
+with the operation $^\frown$ is a group. We call $\Tilde{A}/\sim$ 
+together with the aforementioned operation the
+{\em free group} on the set $A$. Prove that the assignment
+\begin{equation*}
+    A\longmapsto \Tilde{A}/\sim
+\end{equation*}
+is a part of a functor $\textbf{Sets}\to\textbf{Grp}$. This functor is called the
+{\em free functor.}
+\end{exercise}
+
+\begin{exercise}\label{exc:prodcat}
+Prove that the product category defined in \autoref{examples:functors} is 
+indeed a category. Define properly the functors $\pi_{0}:\cC\times\cD\to\cC$
+and $\pi_{1}:\cC\times\cD\to\cD$.
+\end{exercise}
+
+
+\begin{exercise}\label{exc:slicecat}
+Let $\cC$ be a category and $X$ and object of $\cC$. Prove that the slice category 
+$\cC/X$ defined in \autoref{def:slicecat} is indeed a category.
+Prove that the assignment defined in \autoref{slice:func} indeed 
+defines a functor. Moreover, show that this assignment
+\begin{equation*}
+    X\mapsto \cC/X
+\end{equation*}
+gives rise to a functor $\cC\to\textbf{Cat}$.
+\end{exercise}
+
+
+\begin{exercise}\label{exc:oppcat}
+Convince yourself that the statements in \autoref{note:opposite}(b) are true.
+\end{exercise}
+
+\begin{exercise}\label{exc:yonedafunc}
+Prove that the functors $y_{A},h_{A}$ defined in \autoref{example:yoneda} are indeed
+functors.
+\end{exercise}
+
+\begin{exercise}[$\Hom$ functor] \label{exc:homfunc}
+Let $\cC$ be a locally small category. Show that there is a functor 
+$\Hom(-,-):\cC^{\op}\times\cC\to\textbf{Set}$, assigning $\Hom(A,B)$
+to the pair $(A,B)$ of objects of $\cC$.
+\end{exercise}
+
+
+
+\begin{exercise}[Abelianization functor] \label{exc:abelianizationfunc}
+Let $G$ be a group and consider the {\em commutator subgroup} $[G,G]$ of $G$,
+generated by all elements of the form $[g,h]:=ghg^{-1}h^{-1}, g,h\in G$.
+Prove that $[G,G]$ is a normal subgroup of $G$, that $G/[G,G]$ is an
+abelian group and satisfies the following property: 
+for every group homomorphism $\phi:G\to H$ to
+an abelian group $H$ there exists a unique homomorphism
+$\overline{\phi}:G/[G,G]\to H$ such that the diagram
+\begin{equation*}
+    \begin{tikzcd}
+        G \arrow[r,"p"] \arrow[rd,"\phi"']
+        & G/[G,G] \arrow[d,"\overline{\phi}"] \\
+        & A
+    \end{tikzcd}
+\end{equation*}
+commutes\footnote{This property is the {\em universal property of the
+abelianization}.} (here $p:G\to G/[G,G]$ denotes the quotient group homomorphism,
+i.e. the map $G\ni g\mapsto g+[G,G]\in G/[G,G]$). The abelian group
+$G/[G,G]$ is called the {\em abelianization} of $G$. Show that this construction
+ is functorial, i.e. gives rise to a functor $\textbf{Grp}\to \textbf{Abgp}$.
+\end{exercise}
+
+
+
+
+
+
+
+\end{document}
