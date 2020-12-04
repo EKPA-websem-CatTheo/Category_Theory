@@ -9,8 +9,13 @@
 \usepackage{mathtools}
 
 
+
+
 \usepackage{tikz}
 \usepackage{tikz-cd}
+\usetikzlibrary{decorations}
+\usetikzlibrary{decorations.pathmorphing}
+
 
 % for \mapsfrom
 \usepackage{stmaryrd}
@@ -188,9 +193,10 @@
 \label{psy}
 \end{figure}
 \selectlanguage{english}
+\section{Categories and functors}
 \begin{exercises}
 \begin{enumerate}
-\item Let X be an object and $\textlatin{Id}_X,\textlatin{Id}'_X$ be two identity arrows for the object X. Applying the definition for $\textlatin{Id}_X$ with $f=\textlatin{Id}'_X$ one has \[\textlatin{Id}'_X \circ \textlatin{Id}_X=\textlatin{Id}'_X\]
+\item Let X be an object and $\id_X,\id'_X$ be two identity arrows for the object X. Applying the definition for $\id_X$ with $f=\id'_X$ one has \[\textlatin{Id}'_X \circ \textlatin{Id}_X=\textlatin{Id}'_X\]
 Applying the definition for $\textlatin{Id}'_X$ for $g=\textlatin{Id}_X$ we get \[\textlatin{Id}'_X \circ \textlatin{Id}_X=\textlatin{Id}_X\]
 Hence $\textlatin{Id}'_X =\textlatin{Id}_X$
 
@@ -261,12 +267,135 @@ $(\Leftarrow)$ Immediate by the definition of injective functions.
 \end{enumerate}
 \item A mono $f:A \to B$ is split $\iff \exists g:B \to A: gf=\text{Id}_A$\\
 We do only the case of a split mono. Let $f:A \to B$ be a split mono and $F:\cC \to \cD$ be a functor. We show that $F(f)$ is a split mono. By the choice of $f$ we have $\exists g:B \to A: fg=\text{Id}_B$. By applying $F$ we get $F(f)F(g)=F(fg)=F(\text{Id}_B)=\text{Id}_{FB}$.
-\item Let $i:\mathbb{Z} \hookrightarrow \mathbb{Q}$ be the embedding wtih $i(1_{\mathbb{Z}})=1_{\mathbb{Q}}$. Take two arbitrary $f,g:\mathbb{Q} \to R$ and suppose $fi=gi \iff \forall k \in \mathbb{N}: f(\frac{k}{1})=g(\frac{k}{1})$. We have $g(1)=h(1) \Rightarrow g(m\cdot m^{-1})=h(1)=1_R$ since $g$ is multiplicative, $g(m)\cdot g(m^{-1})=h(1)=1_R$. Notice this implies $g(m^{-1})=(g(m))^{-1}$. Additionally we get $g(m^{-1})=h(1) (g(m))^{-1}=h(1)(h(m))^{-1}=h(m^{-1})$. Now take an arbitrary $\frac{m}{n} \in \mathbb{Q}$ by applying $g: g(\frac{m}{n})=g(mn^{-1})=g(m)g(n^{-1})=h(m)h(n^{-1})=h(\frac{m}{n})$. Therefore indeed we have  $f=g$ thus $i$ is indeed epi.
+\item Let $i:\mathbb{Z} \hookrightarrow \mathbb{Q}$ be the embedding wtih $i(1_{\mathbb{Z}})=1_{\mathbb{Q}}$. Take two arbitrary $f,g:\mathbb{Q} \to R$ and suppose $fi=gi \iff \forall k \in \mathbb{N}: f(\frac{k}{1})=g(\frac{k}{1})$. We have $g(1)=h(1) \Rightarrow g(m\cdot m^{-1})=h(1)=1_R$ since $g$ is multiplicative, $g(m)\cdot g(m^{-1})=h(1)=1_R$. Notice this implies $g(m^{-1})=(g(m))^{-1}$. Additionally we get $g(m^{-1})=h(1) (g(m))^{-1}=h(1)(h(m))^{-1}=h(m^{-1})$. Now take an arbitrary $\frac{m}{n} \in \mathbb{Q}$ by applying $g: g(\frac{m}{n})=g(mn^{-1})=g(m)g(n^{-1})=h(m)h(n^{-1})=h(\frac{m}{n})$. Therefore indeed we have  $f=g$ thus $i$ is epi.
 \item 
 \begin{enumerate}
-\item 
+First let $g:X \to Y$ and $f:Y \to Z$
+\item  If $g,f$ are isos, then there exist $r:Y\to X$ such that $gr=\text{Id}_Y$ and $rg=\id_X$. Similarly we have $fs=\id_Z$ and $sf=\id_Y$
+We show $(fg)^{-1}=rs$ thus $fg$ is invertible and so an iso. We have $(rs)(fg)=r(sf)g=r \id_Y g=rg=\id_X$ and $(fg)(rs)=f(gr)s=f \id_Y s=fs=\id_Z$.
+\item Suppose $f,fg$ are isos then there exist $r=f^{-1}:Z \to Y, s:Z \to X$ with $sfg=\id_X$ and $fgs=\id_Z$. We show $sf$ is the inverse of $g$. We already have $sfg=\id_X$. Since $fgs=\id_Z$ we get $gs=r$ by composing $r$ on the right. Then by applying $f$ on the right we get the desired $gsf=\id_X$
+\item  Let $t$ be the inverse of $g$, and $s=(fg)^{-1}$. By the definitions we get $fgs=f(gs)=\id_Z$. Also, $sfg=\id_X \Rightarrow sf=t \Rightarrow gsf=\id_Y$
+\end{enumerate}
+\item Let $F:\cC \to \cD$ be a faithfull functor and $f:X\to Y$ be an arrow. We will show that $F(f)$ is an epi $\Rightarrow f$ is one as well. We take two arrows in $h_1,h_2:Y \to Z$ in $\cC$, that satisfy $fh_1=fh_2$. Then \[F(f)F(h_1)=F(fh_1)=F(fh_2)=F(f)F(h_2)\] But $F(f)$ is an epi, thus we get $F(h_1)=F(h_2)$. Since $F$ is a faithfull functor, this implies $h_1=h_2$.
+\item Let $F:\cC \to \cD$ be a full and faithfull functor, $X \in (\cC)_0$ such thtat $F(X)$ is terminal in $\cD$. To show $X$ is terminal in $\cC$ take an arbitrary $Y \in (\cC)_0$ and consider its image under $F$. Since $F(X)$ is terminal in $\cD$, $\exists! f_{F(Y)}:F(Y) \to F(X)$. But $F$ is full, so there exists $f_Y:X \to Y$, with $F(f_Y)=f_{F(Y)}$. Notice also that by faithfullness this arrow is unique. So indeed $X$ is terminal in $\cC$. Duality implies the result for initial objects. The direct approach is similiar.
+\item Let $X,X'$ be two terminal objects. This proof relies heavily on the uniqueness property in the definition of terminal objects. Since $X$ is terminal, apply the definition for itself. Thus there exists a unique arrow $X\to X$ which has to be the identity arrow. Same for $X'$. Now let $r:X \to X'$ and $s:X' \to X$ be the unique arrows we get from applying the definition of terminality for $X$ with $X'$ and vice verca. Now consider the compositions $sr:X \to X$ and $rs:X' \to X'$. By our previous considerations we get $sr=\id_X$ and $rs=\id_{X'}$. 
+\item Recall the definition of a congruence relation  on $\cC$. $f \sim g \Rightarrow fg^{-1}\sim gg^{-1}=\id_X$ by reflexivity: $fg^{-1}\sim \id_X$. Composing $f^{-1}$ on the right we get $f^{-1}fg^{-1} \sim f^{-1} \id_X \iff g^{-1} \sim f^{-1}$.
+\item
+
+
+
+
+
+\item There are several things to be proven 
+\begin{enumerate}
+\item Firstly we must show that for arbitrary $E \in \cE_0$,and an arbtirary finctor $F:\cE \times \cC \to \cD$ the induced $F_E:\cC \to \cD$ is indeed a functor. The two properties will be direct consequences of the corresponding properties of the functor $F:\cE \times \cC \to \cD$.\\
+ Take $\id_C$ for an object $C \in (\cC)_0$, and consider its image under $F_E$. \[F_E(\id_C)=F(\id_E,\id_C)=\id_{F(E,C)}=\id_{F_E(C)}\] The equality in the middle was by virtue of the definition of product of categories and functoriality of $F$.\\
+ Suppose we have an arrow $gf:C\to C' \to C''$ in $\cC$. Then \[F_E(gf)=F(\id_E,gf)=F(\id_E \id_E,gf)=F(\id_E,g)F(\id_E,f)=F_E(g)F_E(f)\] thus, for arbitrary $E \in \cE_0$, $F_E$ is indeed a functor.
+ \item Any $g:E \to E'$ in $\cE$ induces a family $\big( F(g,\id_C):F_E(C) \to F_{E'}(C) \big)_{C\in \cC_0}$. Proving this family of arrows is a natural transormation $F_E \Rightarrow F_{E'}$ is equivalent to the commutativity of the following diagram.
+ 
+ % https://q.uiver.app/?q=WzAsNCxbMCwwLCJGX0UoQykiXSxbMiwwLCJGX3tFJ30oQykiXSxbMiwyLCJGX3tFJ30oQycpIl0sWzAsMiwiRl9FKEMnKSJdLFswLDEsIkYoZyxcXGlkX0MpIl0sWzEsMiwiRl97RSd9KGYpIl0sWzAsMywiRl9FKGYpIiwyXSxbMywyLCJGKGcsXFxpZF97Qyd9KSIsMl1d
+\[\begin{tikzcd}
+	{F_E(C)} && {F_{E'}(C)} \\
+	\\
+	{F_E(C')} && {F_{E'}(C')}
+	\arrow["{F(g,\id_C)}", from=1-1, to=1-3]
+	\arrow["{F_{E'}(f)}", from=1-3, to=3-3]
+	\arrow["{F_E(f)}"', from=1-1, to=3-1]
+	\arrow["{F(g,\id_{C'})}"', from=3-1, to=3-3]
+\end{tikzcd}\]
+Using the definitions of $F_E$,$F_{E'}$ we translate the problem back in the product category $\cE \times \cC$. We must prove the following diagram is commutative.
+
+% https://q.uiver.app/?q=WzAsNSxbMCwwLCJGKEUsQykiXSxbMiwwLCJGKEUnLEMpIl0sWzIsMiwiRihFJyxDJykiXSxbMCwyLCJGKEUsQycpIl0sWzIsMV0sWzAsMSwiRihnLFxcaWRfQykiXSxbMSwyLCJGKFxcaWRfe0UnfSxmKSJdLFswLDMsIkYoXFxpZF9FLGYpIiwyXSxbMywyLCJGKGcsXFxpZF97Qyd9KSIsMl1d
+\[\begin{tikzcd}
+	{F(E,C)} && {F(E',C)} \\
+	&& {} \\
+	{F(E,C')} && {F(E',C')}
+	\arrow["{F(g,\id_C)}", from=1-1, to=1-3]
+	\arrow["{F(\id_{E'},f)}", from=1-3, to=3-3]
+	\arrow["{F(\id_E,f)}"', from=1-1, to=3-1]
+	\arrow["{F(g,\id_{C'})}"', from=3-1, to=3-3]
+\end{tikzcd}\]
+ This amounts to an equality of morphisms: \[ F( \id_{E'},f) F(g,\id_C)=F(g,\id_{C'})F(\id_E,f)\] By functoriality of $F$ we get \[F(\id_{E'} g,f \id_C)=F(g\id_E,\id_{C'} f)\]
+ \[F(g,f)=F(g,f)\]
+ 
+ 
+ %\item To prove the correspondence $ \Psi:(\cE \times \cC \to \cD)\to (\cE \to \cD^{\cC})$ with $ F \mapsto F_{(-)}$ is functorial we take $\cD$ to be $\cE \times \cC$ and consider the image of the identity functor $I:=\id_{\cE \times \cC}$. As above this induces a functor $I_{(-)}:\cE \to (\cE \times \cC)^{\cC}$. We must show that for arbtirtary $E \in (\cE)_0$
+ \item Given a functor $G:\cE \to \cD^{\cC}$ if we define $\tilde{G}(E,C)=G(E)(C)$ and $\tilde{G}(f,g)=G(g)_{C'}G(E)(f)=G(E')(f)G(g)_C$ and prove this is a functor from $\cE \times \cC \to \cD$. Notice $G(g)_{C'}$ is the $C'$-component of the natural transformation $G(g)$ which for any $f:C \to C'$ gives rise to a commutative diagram, as per the definition.\\
+ %These definitions arise naturally if we consider th
+ We begin by showing that the above object is well defined. Indeed $\tilde{G}(E,C)=G(E)(C)=[ G(E) ](C)$. $G(E)$ is an object of $\cD^{\cC}$ thus a functor $[G(E)]:\cC \to \cD$. Therefore $[ G(E) ](C)$ is indeed an object in $\cD$.\\
+ Similarly all 4 vertices of the commutative diagram shown are objects in $\cD$ with $\cD$-arrows between them. $\tilde{G}(f,g)$ is a composition of such arrows thus itself an arrow in $\cD$.
+ 
+  Take $\id_{(E,C)}=(\id_E,\id_C)$ and consider its image under $\tilde{G}$. Following the process as defined above, we evaluate the functor $G$ at $E$ .\\
+   The arrow $\id_E$ induces a natural transformation $G(E)\Rightarrow G(E)$. $\id_C$ is a morphism in $\cC$ so, by the definition of naturality, it induces a commutative diagram in $\cD$.\\
+    Functoriality of $G$ implies this has to be the identity natural trasnformation. Recall all components of the identity natural transformation are the identity arrows of the various objects. Meaning $G(\id_E)_C=\id_{G(E)(C)}$.\\
+     Additionally since $G(E)$ is a functor it is clear that $G(E)(\id_C)=\id_{G(E)(C)}$.
+   Thus all $4$ morphisms in the diagram equal $\id_{G(E)(C)}$. This implies $\tilde{G}(\id_E,\id_C)=\id_{G(E)(C)}$.\\
+   Now for the composition property. As in the definition the arrow $g'g:E\to E''$ induces a natural transformation $G(g'g)$ that together with the arrow $f'f:c\to C''$ give us:
+   
+   % https://q.uiver.app/?q=WzAsNCxbMCwwLCJcXHRpbGRle0d9KEUsQykiXSxbMCwyLCJcXHRpbGRle0d9KEUsQycnKSJdLFsyLDIsIlxcdGlsZGV7R30oRScnLEMnJykiXSxbMiwwLCJcXHRpbGRle0d9KEUnJyxDKSJdLFswLDEsIkcoRSkoZidmKSIsMl0sWzEsMiwiRyhnJ2cpX0MiLDJdLFszLDIsIkcoRScnKShmJ2YpIiwwLHsib2Zmc2V0IjoxfV0sWzAsMywiRyhnJ2cpX0MiXV0=
+\[\begin{tikzcd}
+	{\tilde{G}(E,C)} && {\tilde{G}(E'',C)} \\
+	\\
+	{\tilde{G}(E,C'')} && {\tilde{G}(E'',C'')}
+	\arrow["{G(E)(f'f)}"', from=1-1, to=3-1]
+	\arrow["{G(g'g)_{C''}}"', from=3-1, to=3-3]
+	\arrow["{G(E'')(f'f)}", from=1-3, to=3-3, shift right=1]
+	\arrow["{G(g'g)_C}", from=1-1, to=1-3]
+\end{tikzcd}\]
+   To make the situation clearer we include the interveening objects and arrows
+   %\usetikzlibrary{decorations}
+
+   
+  % https://q.uiver.app/?q=WzAsOSxbMCwwLCJcXHRpbGRle0d9KEUsQykiXSxbMiwwLCJcXHRpbGRle0d9KEUnLEMpIl0sWzQsMCwiXFx0aWxkZXtHfShFJycsQykiXSxbMCwyLCJcXHRpbGRle0d9KEUsQycpIl0sWzIsMiwiXFx0aWxkZXtHfShFJyxDJykiXSxbNCwyLCJcXHRpbGRle0d9KEUnJyxDJykiXSxbMCw0LCJcXHRpbGRle0d9KEUsQycnKSJdLFsyLDQsIlxcdGlsZGV7R30oRScsQycnKSJdLFs0LDQsIlxcdGlsZGV7R30oRScnLEMnJykiXSxbMCwxLCJHKGcpX0MiXSxbMSwyLCJHKGcnKV9DIl0sWzAsMywiRyhFKShmKSIsMV0sWzEsNCwiRyhFJykoZikiXSxbMiw1LCJHKEUnJykoZikiXSxbMyw0LCJHKGcpX3tDJ30iLDJdLFs0LDUsIkcoZycpX3tDJ30iXSxbMyw2LCJHKEUpKGYnKSIsMV0sWzQsNywiRyhFJykoZicpIl0sWzUsOCwiRyhFJycpKGYnKSJdLFs2LDcsIkcoZylfe0MnJ30iLDJdLFs3LDgsIkcoZycpX3tDJyd9IiwyXSxbMCw0LCIiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJzcXVpZ2dseSJ9fX1dLFs0LDgsIiIsMix7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6InNxdWlnZ2x5In19fV1d
+\[\begin{tikzcd}
+	{\tilde{G}(E,C)} && {\tilde{G}(E',C)} && {\tilde{G}(E'',C)} \\
+	\\
+	{\tilde{G}(E,C')} && {\tilde{G}(E',C')} && {\tilde{G}(E'',C')} \\
+	\\
+	{\tilde{G}(E,C'')} && {\tilde{G}(E',C'')} && {\tilde{G}(E'',C'')}
+	\arrow["{G(g)_C}", from=1-1, to=1-3]
+	\arrow["{G(g')_C}", from=1-3, to=1-5]
+	\arrow["{G(E)(f)}" description, from=1-1, to=3-1]
+	\arrow["{G(E')(f)}", from=1-3, to=3-3]
+	\arrow["{G(E'')(f)}", from=1-5, to=3-5]
+	\arrow["{G(g)_{C'}}"', from=3-1, to=3-3]
+	\arrow["{G(g')_{C'}}", from=3-3, to=3-5]
+	\arrow["{G(E)(f')}" description, from=3-1, to=5-1]
+	\arrow["{G(E')(f')}", from=3-3, to=5-3]
+	\arrow["{G(E'')(f')}", from=3-5, to=5-5]
+	\arrow["{G(g)_{C''}}"', from=5-1, to=5-3]
+	\arrow["{G(g')_{C''}}"', from=5-3, to=5-5]
+	\arrow[from=1-1, to=3-3, squiggly]
+	\arrow[from=3-3, to=5-5, squiggly]
+\end{tikzcd}\]
+
+The arrows we begin with concer solely the outermost square. Essentially what we want to show is that we can equivalently take a route trhough the middle, along the squiggly arrows. Notice that the squiggly arrows stand for $\tilde{G}(g,f)$ and $\tilde{G}(g',f')$ respectively. We will be reffering to the squares with numbers, beggining at top-left with 1, and continuing clockwise.\\
+  Since $G$ is a functor we get $G(g'g)=G(g') G(g)$. So for both $C$ and $C''$ we have $G(g'g)_C=G(g')_C G(g)_C$, in the top horizontal line, and $G(g'g)_{C''}=G(g')_{C''} G(g)_{C''}$ in the bottom one.\\
+   Similarly both $G(E),G(E'')$ are functors so $G(E)(f'f)=G(E)(f')\circ G(E)(f)$ and  $G(E'')(f'f)=G(E'')(f') \circ G(E'')(f)$.\\
+   This justifies, say the left curved arrow (which is the only one displayed) breaking in its components.\\
+   The important idea is to see that \textit{all} squares are commutative. This is the case because any combination of $f,f'$ and $g,g'$ we take will give a commutative diagram By following the already described procedure. For example let's see once more the process that proves commutativity of square no.3. Evaluate $G$ at $\dom(g)=E, \cod(g)=E'$ to get two functors, $G(E),G(E')$. Use $g$ to get a natural transformation $G(E) \Rightarrow G(E')$. Applying the definition of natural transformation for $f':C' \to C''$ we get the desired diagram.\\
+  At the beggining we have \[\tilde{G}(g'g,f'f)=G(g'g)_{C''}G(E)(f'f)=G(E'')(f'f)G(g'g)_{C''}\] which becomes \[G(g')_{C''}G(g)_{C''}G(E)(f')G(E)(f)\] Using the commutativity of 3 we have the equality $G(g)_{C''}G(E)(f')=G(E')(f')G(g)_{C'}$ which we replace above to obtain 
+  \[G(g')_{C''}G(E')(f')G(g)_{C'}G(E)(f)\] Take a moment to follow the route in the diagram. It is precisely the route below the squiggly arrows. Naturally our next step is to use commutativity of 1,2 respectively. We spell this out. Commutativity of 1 asserts $G(g)_{C'}G(E)(f)=G(E')(f)G(g)_C$ which is precisely $=\tilde{G}(g,f)$. Similarly commutativity  of 2 that $G(g')_{C''}G(E')(f')=G(E'')(f')G(g')_{C'}=\tilde{G}(g',f')$. Thus proving $\tilde{G}(g'g,f'f)= \tilde{G}(g',f')\tilde{G}(g,f)$. Notice how we begun with only one of the equal expressions for  $\tilde{G}(g'g,f'f)$. We could have just as easily have begun with the top of the outer square and similarly obtain the same.
+  
+  
+   %Using both we get \[ G(E'')(f')G(g')_{C'}G(E')(f)G(g)_C\] 
+  %The definition of composition of natural transformations is to compose, for all objects, the components. So indeed we get $\tilde{G}(g'g,f'f)=G(g'g)_{C''}G(E)(f'f)=G(E'')(f'f)G(g'g)_{C''}$ which becomes $G(g')_{C''}G(g)_{C''}$
+   
+  % In the general setting we have that the component at an object of a composition of natural transformations is the composition of the components at the object. Symbolically: $(\nu \mu) _C=\nu_C \circ \mu_C$
+   
+   
+ \item Now we must prove the two processes to be inverse to each other.\\
+ To do this we take a functor $F:\cE \times \cC \to \cD$. Then, as above, we obtain a functor $F_{(-)}:\cE \to \cD^{\cC}$ as in $(c)$ we verify $\tilde{F}_{(-)}(E,C)=F_{(-)}(E,C)=F_E(C)=F(E,C)$. Now for morphisms $\tilde{F}_{(-)}(g,f)=\tilde{F}_{(-)}(g)_{C'} \tilde{F}_{(-)}(E)(f)=F(g,\id_{C'})F_E(f)=F(g,\id_{C'})F(\id_E,f)=F(g\id_E,\id_{C'},f)=F(g,f)$.\\
+ For the opposite direction, take  $G:\cE \to \cD^{\cC}$ and obtain $\tilde{G}$ as before. Then consider $\tilde{G}_{(-)}:\cE \to \cD^{\cC}$ like in the previous construction. Take an object $E$ in $\cE$. Then $\tilde{G}_{(-)}(E)=\tilde{G}_E$ is a functor in $\cD^{\cC}$. We must show it is the same as $G(E)$. Take an arbitrary obect $C$ of $\cC$. Then $\tilde{G}_E(C)=\tilde{G}(E,C)=G(E)(C)$. Take a morphism $g:E\to E'$ and show $\tilde{G}_{(-)}$ and $G$ induce the same natural transformation. It suffices to take an arbitrary component, say at $C$,  and show they agree at that. $\tilde{G}_{(-)}$ induces $\Big( \tilde{G}(g,\id_C):\tilde{G}_E \to \tilde{G}_{E'} \Big)_{C\in \cC_0}$ the component at $C$ is $\tilde{G}(g,\id_C):\tilde{G}_E \to \tilde{G}_{E'}$. By the definition of $\tilde{G}$ we get $\tilde{G}(g,\id_C)=G(g)_C G(E)(\id_C):G(E)(C) \to G(E')(C)$.
+ But $G(E)(\id_C)=\id_{G(E)(C)}$ so indeed we end up with $G(g)_C$ which is precisly the $C$-component of the natural transformation $G(g)$.
+
 \end{enumerate}
 
 \end{enumerate}
 \end{exercises}
+
+
+
+
+
 \end{document}
