@@ -105,29 +105,59 @@
 \def\questionautorefname{Question}
 
 
+\newtheoremstyle{plain}% <name>
+{3pt} % <space above>
+{3pt} % <space below>
+{\it} % <Body font>
+{} % <Indent amount>
+{\rm\bfseries} % <Theorem head font>
+{.} % <Punctuation after theorem head>
+{.5em} % <Space after theorem head>
+{} % <Theorem head spec (can be left empty, meaning ‘normal’)>
+
+\newtheoremstyle{definition}% <name>
+{15pt} % <space above>
+{15pt} % <space below>
+{\rm} % <Body font>
+{} % <Indent amount>
+{\rm\bfseries} % <Theorem head font>
+{.} % <Punctuation after theorem head>
+{.5em} % <Space after theorem head>
+{} % <Theorem head spec (can be left empty, meaning ‘normal’)>
+
+\newtheoremstyle{remark}% <name>
+{3pt} % <space above>
+{3pt} % <space below>
+{\rm} % <Body font>
+{} % <Indent amount>
+{\it} % <Theorem head font>
+{.} % <Punctuation after theorem head>
+{.5em} % <Space after theorem head>
+{} % <Theorem head spec (can be left empty, meaning ‘normal’)>
+
+
 \theoremstyle{plain}
 \mynewtheorem{theorem}{Theorem}
 \mynewtheorem{proposition}{Proposition}
 \mynewtheorem{corollary}{Corollary}
 \mynewtheorem{lemma}{Lemma}
-\mynewtheorem{exercise}{Exercise}
 
 \theoremstyle{definition}
 \mynewtheorem{definition}{Definition}
+\mynewtheorem{example}{Example}
+\mynewtheorem{exercise}{Exercise}
+\mynewtheorem{examples}{Examples}
+\mynewtheorem{exercises}{Exercises}
+
 \theoremstyle{remark}
-\mynewtheorem{sublemma}{Sublemma}
 \mynewtheorem{claim}{Claim}
-\mynewtheorem{fact}{Fact}
 \mynewtheorem{remark}{Remark}
-\mynewtheorem{application}{Application}
 \mynewtheorem{conjecture}{Conjecture}
 \mynewtheorem{question}{Question}       
 \mynewtheorem{observation}{Observation}
 \mynewtheorem{problem}{Problem}
 \mynewtheorem{note}{Note}
-\mynewtheorem{examples}{Examples}
-\mynewtheorem{example}{Example}
-\mynewtheorem{exercises}{Exercises}
+\mynewtheorem{remarks}{Remarks}
 
 %1-1 correspondence
 \makeatletter
@@ -175,8 +205,8 @@
 
 
 
-\title{Category Theory and Topos Theory: Lecture Notes}
-\author{Alexandros Leivaditis + George Politopoulos}
+\title{Category Theory: Exercises}
+\author{$\mathrm{CT_{\Epsilon\Kappa\Pi\Alpha}}$\MakeLowercase{WS}}
 \date{\today}
 
 \begin{document}
