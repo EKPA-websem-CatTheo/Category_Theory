@@ -418,8 +418,40 @@ The arrows we begin with concer solely the outermost square. Essentially what we
  To do this we take a functor $F:\cE \times \cC \to \cD$. Then, as above, we obtain a functor $F_{(-)}:\cE \to \cD^{\cC}$ as in $(c)$ we verify $\tilde{F}_{(-)}(E,C)=F_{(-)}(E,C)=F_E(C)=F(E,C)$. Now for morphisms $\tilde{F}_{(-)}(g,f)=\tilde{F}_{(-)}(g)_{C'} \tilde{F}_{(-)}(E)(f)=F(g,\id_{C'})F_E(f)=F(g,\id_{C'})F(\id_E,f)=F(g\id_E,\id_{C'},f)=F(g,f)$.\\
  For the opposite direction, take  $G:\cE \to \cD^{\cC}$ and obtain $\tilde{G}$ as before. Then consider $\tilde{G}_{(-)}:\cE \to \cD^{\cC}$ like in the previous construction. Take an object $E$ in $\cE$. Then $\tilde{G}_{(-)}(E)=\tilde{G}_E$ is a functor in $\cD^{\cC}$. We must show it is the same as $G(E)$. Take an arbitrary obect $C$ of $\cC$. Then $\tilde{G}_E(C)=\tilde{G}(E,C)=G(E)(C)$. Take a morphism $g:E\to E'$ and show $\tilde{G}_{(-)}$ and $G$ induce the same natural transformation. It suffices to take an arbitrary component, say at $C$,  and show they agree at that. $\tilde{G}_{(-)}$ induces $\Big( \tilde{G}(g,\id_C):\tilde{G}_E \to \tilde{G}_{E'} \Big)_{C\in \cC_0}$ the component at $C$ is $\tilde{G}(g,\id_C):\tilde{G}_E \to \tilde{G}_{E'}$. By the definition of $\tilde{G}$ we get $\tilde{G}(g,\id_C)=G(g)_C G(E)(\id_C):G(E)(C) \to G(E')(C)$.
  But $G(E)(\id_C)=\id_{G(E)(C)}$ so indeed we end up with $G(g)_C$ which is precisly the $C$-component of the natural transformation $G(g)$.
+ \end{enumerate}
 
-\end{enumerate}
+
+\item Recall that for a locally small category $\cC$ we define the correspondence $\cC^{op} \times \cC \to \text{Set}$ with $(X,Y) \mapsto \hom(X,Y)$ (see ex6). If we choose our favourite object $C$ of $\cC_0$ and stabilize it in the second position, this gives rise to a functor $y_C: \cC^{op} \to \text{Set}$ i.e. the object of ex6 is functorial in both postions (much as a tensor is multi-linear functors from product categories are similarly multi-functorial).
+ With regards to objects we have $y_C(C')=\hom(C',C)$ and for arrows, if $f:C'' \to C'$, $y_C(f)$ is  composition with $f$ on the right. Essentially we want to show the correspondece $C \mapsto y_C$ is functorial with $y_{(-)}:\cC \to \text{Set}^{\cC^{op}}$ then an arrow $g:C_1 \to C_2$ gives a natural transformation $y_g :y_{C_1} \Rightarrow y_{C_2}$, whose components are composition with $g$ on the left. The arrow $f$ gives the following diagram. All we have to do is to show this is commutative.
+ % https://q.uiver.app/?q=WzAsNCxbMCwwLCJ5X3tDXzF9KEMnKT1cXGhvbShDJyxDXzEpIl0sWzAsMiwieV97Q18xfShDJycpPVxcaG9tKEMnJyxDXzEpIl0sWzIsMCwieV97Q18yfShDJyk9XFxob20oQycsQ18yKSJdLFsyLDIsInlfe0NfMn0oQycnKT1cXGhvbShDJycsQ18yKSJdLFswLDEsInlfe0NfMX0oZikiLDJdLFswLDIsIih5X2cpX3tDJ30iXSxbMiwzLCJ5X3tDXzJ9KGYpIl0sWzEsMywiKHlfZylfe0MnJ30iLDJdXQ==
+\[\begin{tikzcd}
+	{y_{C_1}(C')=\hom(C',C_1)} && {y_{C_2}(C')=\hom(C',C_2)} \\
+	\\
+	{y_{C_1}(C'')=\hom(C'',C_1)} && {y_{C_2}(C'')=\hom(C'',C_2)}
+	\arrow["{y_{C_1}(f)}"', from=1-1, to=3-1]
+	\arrow["{(y_g)_{C'}}", from=1-1, to=1-3]
+	\arrow["{y_{C_2}(f)}", from=1-3, to=3-3]
+	\arrow["{(y_g)_{C''}}"', from=3-1, to=3-3]
+\end{tikzcd}\]
+ 
+ Take an arbitrary arrow $h:C' \to C_1$. First consider the clockwise composition. $y_{C_2}(f)(y_g)_{C_2}(h)=y_{C_2}(f)(gh)=ghf$. Now anti-clockwise: $(y_g)_{C''} y_{C_1}(f)(h)=(y_g)_{C''}(hf)=ghf$ as desired. (compare with ex6.)\\ 
+ To prove this correspoendence is a functor we use ex.20 and reduce the problem to the functor we saw in ex6.
+ \item Since $F(A) \cong F(B)$, by definition, there exist two arrows in $\cD$, $r:F(A) \to F(B)$ and $s:F(B) \to F(A)$ such that \[rs=\id_{F(B)}
+ \text{ and } sr=\id_{F(A)}\] 
+ But $F$ is full so there exist arrows $p:A \to B$ and $q:B \to A$ so that $F(p)=r$ and $F(q)=s$. Therefore we can write  \[\id_{F(B)}=rs=F(p)F(q)=F(pq)\] \[\id_{F(A)}=F(qp)\]
+ Since $F$ is a functor we also have \[F(\id_A)=\id_{F(A)} \text{  and  } F(\id_B)=\id_{F(B)}\] 
+ Faithfuhlness gives us \[\id_A=qp \text{  and  } \id_B=pq \]
+ \item
+ \item Show that two objects $F,G:\cC \to \cD$  are isomorphic in $\cD^{\cC}$ $\iff$ there exists a natural transformation $ \mu:F \Rightarrow G$ whose every component is an iso in $\cD$.\\
+ 
+ By definition, two object are isomporphic when there exists an invertible arrow between them, in this case two natural transformations $\mu: F \Rightarrow G$ and $\nu :G \Rightarrow F$ such that $\nu \mu = \id_F \text{  and  } \mu \nu =\id_G$, the identity natural transformations whose every component is the identity arrow i.e. $\forall C \in \cC_0: (\id_F)_C=\id_{F(C)}$.\\
+ ($\Rightarrow$) Given such natural transformations $\mu_C:F(C) \to G(C)$ and $\nu_C:G(C) \to F(C)$ that satisfy \[\mu_C \nu_C= (\mu \nu)_C= (\id_F)_C=\id_{F(C)}\]
+ Thus, for arbitrary $C$, $\mu_C, \nu_C$ are isos.\\
+ $(\Leftarrow)$ Let $\mu :F\Rightarrow G$ be such a n.t. If we show that the family of arrows: $\nu:= \{ (\mu_C)^{-1} | C \in \cC_0\}$ is a n.t., then we will immediatly have that $F,G$ are isomorphic in $\cD^{\cC}$. To prove this take an arbitrary arrow $f \in \hom(A,B)$ the naturaliry square of $\mu$ for $f$ gives us \[G(f)\mu_A =\mu_B F(f)\] 
+ composing with $(\mu_A)^{-1}$ ny the left and with $(\mu_B)^{-1}$ on the right we get \[F(f)(\mu_A)^{-1}=(\mu_B)^{-1}G(f)\]
+ which is precicly the naturaliy condition for $ \nu$.
+ 
+
 
 \end{enumerate}
 \end{exercises}
