@@ -194,7 +194,6 @@
 
 
 %Έκατσα και εγραψα για το "κεφι" μου το κομματι με το equivalence. Όποιος γραψει τις υπόλοιπες σημειωσεις της τριτης διαλεξης ας το χρησιμοποιήσει όπως θελει. Αν εχω χρονο θα κανω το ιδιο για το F mono
-%Ηθελα και μια μικρή βοηθεια με το τεχ. Αυτα τα δυο διαγραμματακια απο κατω, ιδανικα τα ηθελα διπλα διπλα αλλα και στο κεντρο. Το εψαξα στο google και λενε κατι τρελα με cm. Αν καποιος ειναι εξασκημενος στο tikz και το χει ευκολα να το φτιαξει θα ταν καλο γιατι τωρα μου γαμαει το ocd.
 
 
 Show that $F:\cC \to \cD$ is an equivalence of categories $\iff$ $F$ is full, faithfull and essentially surjective on objects, meaning $(\forall D \in \cD_0 )(\exists C \in \cC_0) FC\cong D$.\\
@@ -202,6 +201,7 @@ Begin with ($\Rightarrow$). Let $F$ be an equivalence of categories. Then we kno
 To show $F$ is essentially surjective take an arbitrary $D \in \cD_0$ and write $D=\id_{\cD}(D)\cong FG(D)$. So we can take $C$ to be $G(D) \in \cC_0$.\\
 To show $F$ is faithfull take $f,g:A \to B$ with $F(f)=F(g): F(A)\to F(B) \Rightarrow GF(f)=GF(g)$. The naturality squares of $\nu$ for $f,g$ respectively are:
 
+\begin{center}
 % https://q.uiver.app/?q=WzAsNCxbMCwwLCJHRihBKSJdLFsyLDAsIkdGKEIpIl0sWzIsMiwiQiJdLFswLDIsIkEiXSxbMCwxLCJHRihmKSJdLFsxLDIsIlxcbnVfQiJdLFswLDMsIlxcbnVfQSIsMl0sWzMsMiwiZiIsMl1d
 \begin{tikzcd}
 	{GF(A)} && {GF(B)} \\
@@ -222,6 +222,7 @@ To show $F$ is faithfull take $f,g:A \to B$ with $F(f)=F(g): F(A)\to F(B) \Right
 	\arrow["{\nu_A}"', from=1-1, to=3-1]
 	\arrow["{g}"', from=3-1, to=3-3]
 \end{tikzcd}\\
+\end{center}
 with the equalities $f\nu_A=\nu_B GF(f)$ and $g \nu_B=\nu_BGF(g)$. But $\nu_A$ is an iso thus \[f=\nu_B GF(f)\nu_A^{-1}=\nu_B GF(g)\nu_A^{-1}=g\]
 
 
